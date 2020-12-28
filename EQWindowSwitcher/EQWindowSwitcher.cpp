@@ -8,9 +8,9 @@
 //TODO: store this state in CreateWindowEx instead: https://docs.microsoft.com/en-us/windows/win32/learnwin32/managing-application-state-
 HWND* windowHandles;
 //TODO: DRY for maximum hot key/window count
-const int hotKeyIDs[4] = { 0, 1, 2, 3 };
+const int hotKeyIDs[6] = { 0, 1, 2, 3, 4, 5 };
 // see https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes for key codes
-const UINT hotKeys[4] = { 0x31, 0x32, 0x33, 0x34 };
+const UINT hotKeys[6] = { 0x31, 0x32, 0x33, 0x34, 0x35, 0x36 };
 
 
 HWND* getEQWindowHandles()
@@ -59,7 +59,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow
     }
 
     windowHandles = getEQWindowHandles();
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 6; i++) {
         if (*(windowHandles + i) == NULL) {
             break;
         }
@@ -91,7 +91,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     switch (uMsg)
     {
     case WM_HOTKEY:
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 6; i++) {
             if (wParam == hotKeyIDs[i]) {
                 SetForegroundWindow(*(windowHandles + i));
                 break;
